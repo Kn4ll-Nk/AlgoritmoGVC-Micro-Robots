@@ -1,0 +1,30 @@
+/mnt/d/Códigos y Proyectos/Memoria de Título/Programa/bin/Debug/net7.0/Programa
+/mnt/d/Códigos y Proyectos/Memoria de Título/Programa/bin/Debug/net7.0/Programa.deps.json
+/mnt/d/Códigos y Proyectos/Memoria de Título/Programa/bin/Debug/net7.0/Programa.runtimeconfig.json
+/mnt/d/Códigos y Proyectos/Memoria de Título/Programa/bin/Debug/net7.0/Programa.dll
+/mnt/d/Códigos y Proyectos/Memoria de Título/Programa/bin/Debug/net7.0/Programa.pdb
+/mnt/d/Códigos y Proyectos/Memoria de Título/Programa/obj/Debug/net7.0/Programa.csproj.AssemblyReference.cache
+/mnt/d/Códigos y Proyectos/Memoria de Título/Programa/obj/Debug/net7.0/Programa.GeneratedMSBuildEditorConfig.editorconfig
+/mnt/d/Códigos y Proyectos/Memoria de Título/Programa/obj/Debug/net7.0/Programa.AssemblyInfoInputs.cache
+/mnt/d/Códigos y Proyectos/Memoria de Título/Programa/obj/Debug/net7.0/Programa.AssemblyInfo.cs
+/mnt/d/Códigos y Proyectos/Memoria de Título/Programa/obj/Debug/net7.0/Programa.csproj.CoreCompileInputs.cache
+/mnt/d/Códigos y Proyectos/Memoria de Título/Programa/obj/Debug/net7.0/Programa.dll
+/mnt/d/Códigos y Proyectos/Memoria de Título/Programa/obj/Debug/net7.0/refint/Programa.dll
+/mnt/d/Códigos y Proyectos/Memoria de Título/Programa/obj/Debug/net7.0/Programa.pdb
+/mnt/d/Códigos y Proyectos/Memoria de Título/Programa/obj/Debug/net7.0/Programa.genruntimeconfig.cache
+/mnt/d/Códigos y Proyectos/Memoria de Título/Programa/obj/Debug/net7.0/ref/Programa.dll
+/mnt/d/GitHub/AlgoritmoGVC-Micro-Robots/bin/Debug/net7.0/Programa
+/mnt/d/GitHub/AlgoritmoGVC-Micro-Robots/bin/Debug/net7.0/Programa.deps.json
+/mnt/d/GitHub/AlgoritmoGVC-Micro-Robots/bin/Debug/net7.0/Programa.runtimeconfig.json
+/mnt/d/GitHub/AlgoritmoGVC-Micro-Robots/bin/Debug/net7.0/Programa.dll
+/mnt/d/GitHub/AlgoritmoGVC-Micro-Robots/bin/Debug/net7.0/Programa.pdb
+/mnt/d/GitHub/AlgoritmoGVC-Micro-Robots/obj/Debug/net7.0/Programa.csproj.AssemblyReference.cache
+/mnt/d/GitHub/AlgoritmoGVC-Micro-Robots/obj/Debug/net7.0/Programa.GeneratedMSBuildEditorConfig.editorconfig
+/mnt/d/GitHub/AlgoritmoGVC-Micro-Robots/obj/Debug/net7.0/Programa.AssemblyInfoInputs.cache
+/mnt/d/GitHub/AlgoritmoGVC-Micro-Robots/obj/Debug/net7.0/Programa.AssemblyInfo.cs
+/mnt/d/GitHub/AlgoritmoGVC-Micro-Robots/obj/Debug/net7.0/Programa.csproj.CoreCompileInputs.cache
+/mnt/d/GitHub/AlgoritmoGVC-Micro-Robots/obj/Debug/net7.0/Programa.dll
+/mnt/d/GitHub/AlgoritmoGVC-Micro-Robots/obj/Debug/net7.0/refint/Programa.dll
+/mnt/d/GitHub/AlgoritmoGVC-Micro-Robots/obj/Debug/net7.0/Programa.pdb
+/mnt/d/GitHub/AlgoritmoGVC-Micro-Robots/obj/Debug/net7.0/Programa.genruntimeconfig.cache
+/mnt/d/GitHub/AlgoritmoGVC-Micro-Robots/obj/Debug/net7.0/ref/Programa.dll
