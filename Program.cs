@@ -12,21 +12,21 @@ class Program
 
         Generador generadorTablero = new Generador(tamTablero);
         Validador validadorTablero = new Validador();
-        int contador = 0;
 
         while(true) {
             generadorTablero.GenerarTablero("Tablero.txt");
             validadorTablero.ValidarTablero("Tablero.txt", 0);
 
             if (validadorTablero.Valido) {      //Si el tablero es válido. 
-                File.Copy("Tablero.txt", contador.ToString() + "_Tablero_Valido.txt", true);    //Se copia el archivo del tablero con otro nombre.
-                contador ++;
+                string date = DateTime.UtcNow.ToString("dd-MM-yyyy");
+                string time = DateTime.Now.ToString("hh:mm:ss tt");
+                File.Copy("Tablero.txt", date + " " + time + ".txt", true);    //Se copia el archivo del tablero con otro nombre.
                 
                 Console.WriteLine("¡Se ha encontrado un tablero válido!");
                 break;
             }
             Console.Clear();
-            Console.WriteLine("Cantidad de Tableros encontrados = " + contador);            
+            Console.WriteLine("Ejecutando... Generación y validación de tableros...");            
         }
     }
 }
