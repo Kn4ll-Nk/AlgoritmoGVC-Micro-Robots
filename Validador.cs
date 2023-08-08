@@ -180,8 +180,9 @@ class Validador {
                 for (int k = 0; k < 4; k++) 
                     for (int l = 0; l < 4; l++) 
                         if(i != j && i != k && i != l
-                        && j != k && j != l && k != l)      //Condición que evita la repetición de números.
+                        && j != k && j != l && k != l){      //Condición que evita la repetición de números.
                             orden.Add(new int[] {i,j,k,l});
+                        }
         
         orden.Add(orden.First());       //Añade el primer elemento en la última posición.
         orden.Remove(orden.First());    //Remueve de la lista el primer elemento.
@@ -264,6 +265,7 @@ class Validador {
     }    
 
     public void ValidarTablero(String nombreArchivo, int it) {
+        orden.Clear();
         LeerTablero(nombreArchivo);
         ListaOrdenamiento();
         DefinirCuadrantes();

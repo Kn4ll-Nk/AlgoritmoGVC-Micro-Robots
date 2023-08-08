@@ -17,7 +17,7 @@ class Program
         while(true) {
             generadorTablero.GenerarTablero("Tablero.txt");
             validadorTablero.ValidarTablero("Tablero.txt", 0);
-
+            //validadorTablero.Valido = false;
             if (validadorTablero.Valido) {      //Si el tablero es válido. 
                 string date = DateTime.UtcNow.ToString("dd-MM-yyyy");
                 string time = DateTime.Now.ToString("hh:mm:ss tt");
@@ -26,8 +26,9 @@ class Program
                 Console.WriteLine("¡Se ha encontrado un tablero válido!");
                 break;
             }
-            Console.Clear();
-            Console.WriteLine("Ejecutando... Generación y validación de tableros...");            
+            //System.GC.Collect();
+            //Console.Clear();
+            //Console.WriteLine("Ejecutando... Generación y validación de tableros...");            
         }
     }
 }
