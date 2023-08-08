@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 
 class Generador {
     // Arreglo que contiene todas las casillas que componen un tablero.
