@@ -14,6 +14,7 @@ class Validador {
     private List<int[]> orden = new List<int[]>();      //Lista donde se almacenan distintas secuencias de ordenamiento para reordenar los cuadrantes del tablero.
     private bool valido = true;     //Variable booleanaque representa si el tablero es válido o no.                 
     private int nNodos;      //Número de nodos que componen el grafo.
+    private bool parcial = false;
 
     //Lee los datos de un documento .txt.
     //Los datos corresponden a un tablero de Micro Robots.
@@ -118,7 +119,10 @@ class Validador {
             valido = false;
         }
         else {
-            idTableros.Add(GenerarID());
+            if (!parcial)
+                idTableros.Add(GenerarID());
+            else 
+                valido = true;
         }
     }
 
@@ -264,11 +268,19 @@ class Validador {
         RotacionCuadrantes(cuadrantes);
     }    
 
-    public void ValidarTablero(String nombreArchivo, int it) {
+    public void ValidarTableroCompleto(String nombreArchivo) {
         orden.Clear();
         LeerTablero(nombreArchivo);
         ListaOrdenamiento();
         DefinirCuadrantes();
+    }
+
+    public void ValidarTableroActual(String nombreArchivo) {
+        parcial = true;
+        LeerTablero(nombreArchivo);
+        InicializarGrafo();
+        CrearGrafo();
+        DFS(0);
     }
 
     public bool Valido { get => valido; set => valido = value;}

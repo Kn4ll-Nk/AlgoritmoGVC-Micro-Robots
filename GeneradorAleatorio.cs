@@ -1,12 +1,12 @@
 using System;
 using System.IO;
 
-class Generador {
+class GeneradorAleatorio {
     // Arreglo que contiene todas las casillas que componen un tablero.
     private String[] casillas;
     private int tamTablero;
 
-    public Generador(int tamTablero) {
+    public GeneradorAleatorio(int tamTablero) {
         this.tamTablero = tamTablero;
         casillas = new String[tamTablero*tamTablero];
     }
