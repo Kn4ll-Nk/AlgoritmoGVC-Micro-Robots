@@ -6,11 +6,11 @@ using System.Linq;
 class Validador {
     
     #nullable disable
-    private List<List<String>> tablero;   //Matriz donde se almacena el tablero del juego. 
+    private List<List<string>> tablero;   //Matriz donde se almacena el tablero del juego. 
     private List<int>[] adyacente;      //Lista que almacena los nodos adjacentes 
     #nullable restore
 
-    private List<String> idTableros = new List<String>();       //Lista que almacena un "ID" de tableros que son válidos. 
+    private List<string> idTableros = new List<string>();       //Lista que almacena un "ID" de tableros que son válidos. 
     private List<int[]> orden = new List<int[]>();      //Lista donde se almacenan distintas secuencias de ordenamiento para reordenar los cuadrantes del tablero.
     private bool valido = true;     //Variable booleanaque representa si el tablero es válido o no.                 
     private int nNodos;      //Número de nodos que componen el grafo.
@@ -18,18 +18,18 @@ class Validador {
 
     //Lee los datos de un documento .txt.
     //Los datos corresponden a un tablero de Micro Robots.
-    //Recibe un String correspondiente a la ruta del archivo.
-    private void LeerTablero(String ruta) {
-        tablero = new List<List<String>>();
+    //Recibe un string correspondiente a la ruta del archivo.
+    private void LeerTablero(string ruta) {
+        tablero = new List<List<string>>();
 
         char[] delimit = new char[] { ' ', '\n' };
         StreamReader objReader = new StreamReader(ruta, System.Text.Encoding.Default);
-        String ? linea = "";
+        string ? linea = "";
         
         while (linea != null) {
             linea = objReader.ReadLine();
             if (linea != null) {
-                tablero.Add(new List<String>());
+                tablero.Add(new List<string>());
                 foreach (string substr in linea.Split(delimit))
                 {
                     if(substr != "") {
@@ -55,8 +55,8 @@ class Validador {
     }
 
     //Devuelve un ID creado a partir de los datos del tablero.
-    private String GenerarID() {
-        String id = "";
+    private string GenerarID() {
+        string id = "";
         for (int i = 0; i < tablero.Count(); i++) {
             for (int j = 0; j < tablero.Count(); j++) {
                 id += tablero[i][j];    //El ID se crea usando los datos del tablero.
@@ -114,22 +114,18 @@ class Validador {
         
         RecorrerGrafo(nodoA, visitados);
 
-        if (!ComprobarValidez(visitados)) {
-
+        if (!ComprobarValidez(visitados))
             valido = false;
-        }
         else {
             if (!parcial)
                 idTableros.Add(GenerarID());
-            else 
-                valido = true;
         }
     }
 
     //Combureba si el movimiento a realizar en el tablero el válido.
     //Recibe dos Strings que corresponden a casillas dentro del tablero.
     //Devuelve verdadero si el movimiento es permitido, falso si no lo es.
-    private bool ComprobarConexion(String A, String B) {
+    private bool ComprobarConexion(string A, string B) {
         if (A[0] == B[0] || A[1] == B[1]) {
             return true;
         }
@@ -194,7 +190,7 @@ class Validador {
 
     //Modifica el tablero acorde a los cambios realizados en los cuadrantes.
     //Recibe un arreglo 3D correspondiente a los cuadrantes,  el tamaño de los cuadrantes, y coeficientes que indican el número del cuadrante, ya sea 0, 1, 2, o 3
-    private void ModificarTablero(String[,,] cuadrantes, int tamCuadrante, int c0, int c1, int c2, int c3) { 
+    private void ModificarTablero(string[,,] cuadrantes, int tamCuadrante, int c0, int c1, int c2, int c3) { 
         for (int i = 0; i < tamCuadrante; i ++) {
             for (int j = 0; j < tamCuadrante; j ++) {
                 tablero[i][j] = cuadrantes[c0,i,j];     //Cuadrante superior izquierdo.
@@ -208,7 +204,7 @@ class Validador {
     //Revisa cada posición de la lista de combinaciones posibles, y las aplica a los cuadrantes.
     //Modifica el tablero de acuerdo al orden de cuadrantes que corresponda.
     //Por cada tablero formado crea un grafo, y realiza una búsqueda en profundidad.
-    private void ReordenarCuadrantes(String[,,] cuadrantes, int tamCuadrante) {
+    private void ReordenarCuadrantes(string[,,] cuadrantes, int tamCuadrante) {
         foreach (var item in orden) {     
             ModificarTablero(cuadrantes, tamCuadrante, item[0], item[1], item[2], item[3]);
             if (idTableros.Count() > 0 && idTableros.Contains(GenerarID())) return;
@@ -222,11 +218,11 @@ class Validador {
 
     //Método que se encarga de rotar un cuadrante. 
     //Recibe un arreglo 3D que representa los cuadrantes, y un valor entero que indica el número del cuadrante que se rotará.
-    private void Rotar(String[,,] cuadrantes, int idCuadrante) {
+    private void Rotar(string[,,] cuadrantes, int idCuadrante) {
         if (!valido) return;    //Si se ha detectado un tablero no válido, no prosigue con el método.
 
         int tamCuadrante = cuadrantes.GetLength(1);
-        String[,] matrizAux = new String[tamCuadrante,tamCuadrante];
+        string[,] matrizAux = new string[tamCuadrante,tamCuadrante];
 
         for (int i = 0, k = tamCuadrante-1; i < tamCuadrante; i ++, k--) 
             for (int j = 0; j < tamCuadrante; j++) 
@@ -241,7 +237,7 @@ class Validador {
     //Se encarga de llamar al método rotar.
     //Se utiliza a modo de realizar una ejecución recursiva del método. 
     //Recibe un arreglo 3D que representa a los cuadrantes.
-    private void RotacionCuadrantes(String[,,] cuadrantes) {
+    private void RotacionCuadrantes(string[,,] cuadrantes) {
         
         Rotar(cuadrantes, 0);   
         Rotar(cuadrantes, 1);
@@ -254,7 +250,7 @@ class Validador {
     //La primera dimensión es el número del cuadrante, la segunda y tercera dimensión son el número de filas y columnas. 
     private void DefinirCuadrantes() {
         int tamCuadrante = tablero.Count()/2;
-        String[,,] cuadrantes = new String[4,tamCuadrante,tamCuadrante];    
+        string[,,] cuadrantes = new string[4,tamCuadrante,tamCuadrante];    
 
         for (int i = 0; i < tamCuadrante; i ++) {
             for (int j = 0; j < tamCuadrante; j ++) {
@@ -268,15 +264,17 @@ class Validador {
         RotacionCuadrantes(cuadrantes);
     }    
 
-    public void ValidarTableroCompleto(String nombreArchivo) {
+    public void ValidarTableroCompleto(string nombreArchivo) {
+        valido = true;
         orden.Clear();
         LeerTablero(nombreArchivo);
         ListaOrdenamiento();
         DefinirCuadrantes();
     }
 
-    public void ValidarTableroActual(String nombreArchivo) {
+    public void ValidarTableroActual(string nombreArchivo) {
         parcial = true;
+        valido = true;
         LeerTablero(nombreArchivo);
         InicializarGrafo();
         CrearGrafo();
