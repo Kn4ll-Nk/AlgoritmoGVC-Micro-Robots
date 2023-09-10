@@ -6,20 +6,19 @@ class GenerarCombinaciones {
     private string[] letra = {"R", "G", "B", "W", "Y", "P"};
     private string[] casillas;
     private Random rng;
-    private int n;
+    private int tamArreglo;
     private int tamTablero;
 
     //Constructor.
-    public GenerarCombinaciones(int tamTablero) {
+    public GenerarCombinaciones(int dimension) {
         validadorTablero = new Validador();
 
-        this.tamTablero = tamTablero;
-        casillas = new string[tamTablero*tamTablero];
+        this.tamTablero = dimension;
         rng = new Random();
-        n = tamTablero*tamTablero;
+        tamArreglo = dimension*dimension;
+        casillas = new string[tamArreglo];
 
-        GenerarCasillas(tamTablero);
-        AleatorizarCasillas();
+        GenerarCasillas(dimension);
     }
 
     //Genera las casillas que conformarán el tablero, dependiendo del tamaño asignado.
@@ -39,16 +38,6 @@ class GenerarCombinaciones {
         }
     }
 
-    //Reordena el arreglo de casiilas de forma aleatoria.
-    private void AleatorizarCasillas() {
-        while (n > 1) {
-            int k = rng.Next(n--);
-            string aux = casillas[n];
-            casillas[n] = casillas[k];
-            casillas[k] = aux;
-        }
-    }
-
     //Genera un documeto .txt, que contiene el tablero con las casillas generadas en formato de matriz.
     private void CrearDocumento(string nombreArchivo, string[] casillas) {
         StreamWriter sw = new StreamWriter(nombreArchivo);
@@ -65,17 +54,17 @@ class GenerarCombinaciones {
     }
 
     //Llama a la función de validar el tablero.
-    private void Validar(string nombreArchivo, string[] casillas, string tipoValidacion) {
+    private void Validar(string nombreArchivo, string[] casillas, string tipoValidacion, int contador) {
         if (tipoValidacion == "0") validadorTablero.ValidarTableroCompleto(nombreArchivo);
         if (tipoValidacion == "1") validadorTablero.ValidarTableroActual(nombreArchivo);
 
         if (validadorTablero.Valido) {      //Si el tablero es válido. 
-            string date = DateTime.UtcNow.ToString("dd-MM-yyyy");
-            string time = DateTime.Now.ToString("hh:mm:ss.ffff tt");
-            File.Copy("Tablero.txt", date + " " + time + ".txt", true);    //Se copia el archivo del tablero con otro nombre.
+            string date = DateTime.Now.ToString("dd-MM-yyyy");
+            string time = DateTime.Now.ToString("HH:mm:ss:ffff");
+            File.Copy("Tablero.txt", "Tableros4x4/" + date + " " + time + ".txt", true);    //Se copia el archivo del tablero con otro nombre.
         }
         Console.Clear();
-        Console.WriteLine("Ejecutando... Generación y validación de tableros...");
+        Console.WriteLine("Ejecutando... Generación y validación de tableros... Iteración : " + contador);
         Console.WriteLine("El programa se detendrá cuando finalice de permutar casillas.");  
     }
 
@@ -88,24 +77,46 @@ class GenerarCombinaciones {
     }
 
     //Función recursiva que explora todas las permutaciones entre elementos posibles.
-    private void Combinaciones(string[] casillas, int cid, string tipoValidacion) {
-        if (cid == casillas.GetLength(0) -1) {
-            string nombreArchivo = "Tablero.txt";
-            CrearDocumento(nombreArchivo, casillas);
-            Validar(nombreArchivo, casillas, tipoValidacion);
-            return; 
+    //Funciona de forma iterativa.
+    private void Combinaciones(string[] casillas, string tipoValidacion) {
+        string nombreArchivo = "Tablero.txt";
+        int contador = 0;
+
+        int[] indices = new int[tamArreglo];
+        for (int i = 0; i < tamArreglo; i++) {
+            indices[i] = 0;
         }
 
-        for (int i = cid; i < casillas.GetLength(0); i ++) {
-            Permutar(casillas, i, cid);
-            Combinaciones(casillas, cid+1, tipoValidacion);
-            Permutar(casillas, i, cid);
+        contador++;
+        CrearDocumento(nombreArchivo, casillas);
+        Validar(nombreArchivo, casillas, tipoValidacion, contador);
+
+        int pos = 0;
+        while (pos < tamArreglo) {
+            if (indices[pos] < pos) {
+                if (pos % 2 == 0) {
+                    Permutar(casillas, 0, pos);
+                } else {
+                    Permutar(casillas, indices[pos], pos);
+                }
+                
+                contador++;
+                CrearDocumento(nombreArchivo, casillas);
+                Validar(nombreArchivo, casillas, tipoValidacion, contador);
+                
+                indices[pos]++;
+                pos = 0;
+            } else {
+                indices[pos] = 0;
+                pos++;
+            }
         }
     }
 
+
     //Método utilizado para llamar y ejecutar el resto de funciones.
     public void GenerarTablero(string tipoValidacion) {
-        Combinaciones(casillas, 0, tipoValidacion);
+        Combinaciones(casillas, tipoValidacion);
     }
 
 }

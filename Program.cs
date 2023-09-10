@@ -42,12 +42,12 @@
             
 
             if (validadorTablero.Valido) {      //Si el tablero es válido. 
-                string date = DateTime.UtcNow.ToString("dd-MM-yyyy");
-                string time = DateTime.Now.ToString("hh:mm:ss.ffff tt");
-                File.Copy("Tablero.txt", date + " " + time + ".txt", true);    //Se copia el archivo del tablero con otro nombre.
+                string date = DateTime.Now.ToString("dd-MM-yyyy");
+                string time = DateTime.Now.ToString("HH:mm:ss:ffff");
+                File.Copy("Tablero.txt", "TablerosAleatoriosEncontrados/" + date + " " + time + ".txt", true);    //Se copia el archivo del tablero con otro nombre.
                 
                 Console.WriteLine("¡Se ha encontrado un tablero válido!");
-                break;
+                //break;
             }
             Console.Clear();
             Console.WriteLine("Ejecutando... Generación y validación de tableros..."); 
@@ -61,7 +61,7 @@
         GenerarCombinaciones generadorTablero = new GenerarCombinaciones(tamTablero);
         generadorTablero.GenerarTablero(tipoValidacion);
     }
-    private static void Main(string[] args) {   
+    private static void Main(string[] args) { 
         Program p = new Program();
         int tamTablero = 0;
         string? tipoGeneracion = "";
@@ -91,5 +91,12 @@
                 p.GVCPermutado(tamTablero);
                 break;
         }  
+        
+        
+        /*
+        Validador v = new Validador();
+        v.ValidarTableroCompleto("TablerosEncontrados/01-09-2023 01:33:13.1175 PM.txt");
+        */
     }
+    
 }
