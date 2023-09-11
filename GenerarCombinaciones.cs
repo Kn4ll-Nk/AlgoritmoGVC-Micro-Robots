@@ -55,10 +55,12 @@ class GenerarCombinaciones {
 
     //Llama a la función de validar el tablero.
     private void Validar(string nombreArchivo, string[] casillas, string tipoValidacion, int contador) {
-        if (tipoValidacion == "0") validadorTablero.ValidarTableroCompleto(nombreArchivo);
-        if (tipoValidacion == "1") validadorTablero.ValidarTableroActual(nombreArchivo);
+        bool valido = false;
+        
+        if (tipoValidacion == "0") valido = validadorTablero.ValidarTableroCompleto(nombreArchivo);
+        if (tipoValidacion == "1") valido = validadorTablero.ValidarTableroActual(nombreArchivo);
 
-        if (validadorTablero.Valido) {      //Si el tablero es válido. 
+        if (valido) {      //Si el tablero es válido. 
             string date = DateTime.Now.ToString("dd-MM-yyyy");
             string time = DateTime.Now.ToString("HH:mm:ss:ffff");
             File.Copy("Tablero.txt", "Tableros4x4/" + date + " " + time + ".txt", true);    //Se copia el archivo del tablero con otro nombre.
@@ -66,6 +68,8 @@ class GenerarCombinaciones {
         Console.Clear();
         Console.WriteLine("Ejecutando... Generación y validación de tableros... Iteración : " + contador);
         Console.WriteLine("El programa se detendrá cuando finalice de permutar casillas.");  
+
+        return;
     }
 
     //Permuta dos posiciones en el arreglo.

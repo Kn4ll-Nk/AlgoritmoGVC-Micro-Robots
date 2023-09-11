@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 class Validador {
     
@@ -210,6 +211,12 @@ class Validador {
             if (idTableros.Count() > 0 && idTableros.Contains(GenerarID())) return;
             InicializarGrafo();
             CrearGrafo();
+            //  contador++;                 //Lo utilizo para comprobar si el tablero generado es válido.
+            //  Console.Clear();
+            //  ImprimirGrafo(0);
+            //  Console.WriteLine();
+            //  Console.WriteLine("it: " + contador);
+            //  //Console.ReadKey();
             DFS(0);
             if (!valido) return;
         }
@@ -264,22 +271,26 @@ class Validador {
         RotacionCuadrantes(cuadrantes);
     }    
 
-    public void ValidarTableroCompleto(string nombreArchivo) {
+    public bool ValidarTableroCompleto(string nombreArchivo) {
         valido = true;
         orden.Clear();
+        idTableros.Clear();
         LeerTablero(nombreArchivo);
         ListaOrdenamiento();
         DefinirCuadrantes();
+
+        return valido;
     }
 
-    public void ValidarTableroActual(string nombreArchivo) {
+    public bool ValidarTableroActual(string nombreArchivo) {
         parcial = true;
         valido = true;
         LeerTablero(nombreArchivo);
         InicializarGrafo();
         CrearGrafo();
         DFS(0);
+
+        return valido;
     }
 
-    public bool Valido { get => valido; set => valido = value;}
 }

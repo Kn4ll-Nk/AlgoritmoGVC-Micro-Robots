@@ -34,20 +34,21 @@
         GeneradorAleatorio generadorTablero = new GeneradorAleatorio(tamTablero);
         Validador validadorTablero = new Validador();
         string nombreArchivo = "Tablero.txt";
+        bool valido = false;
 
         while(true) {
             generadorTablero.GenerarTablero(nombreArchivo);
-            if (tipoValidacion == "0") validadorTablero.ValidarTableroCompleto(nombreArchivo);
-            if (tipoValidacion == "1") validadorTablero.ValidarTableroActual(nombreArchivo);
+            if (tipoValidacion == "0") valido = validadorTablero.ValidarTableroCompleto(nombreArchivo);
+            if (tipoValidacion == "1") valido = validadorTablero.ValidarTableroActual(nombreArchivo);
             
 
-            if (validadorTablero.Valido) {      //Si el tablero es válido. 
+            if (valido) {      //Si el tablero es válido. 
                 string date = DateTime.Now.ToString("dd-MM-yyyy");
                 string time = DateTime.Now.ToString("HH:mm:ss:ffff");
                 File.Copy("Tablero.txt", "TablerosAleatoriosEncontrados/" + date + " " + time + ".txt", true);    //Se copia el archivo del tablero con otro nombre.
                 
                 Console.WriteLine("¡Se ha encontrado un tablero válido!");
-                //break;
+                break;
             }
             Console.Clear();
             Console.WriteLine("Ejecutando... Generación y validación de tableros..."); 
@@ -90,13 +91,12 @@
                 tamTablero = p.SolicitudTamano();
                 p.GVCPermutado(tamTablero);
                 break;
-        }  
+        }   
+
+        //Lo utilizo para comprobar si los tableros generados son válidos.
+        //  Validador v = new Validador();
+        //  v.ValidarTableroCompleto("Tableros4x4/10-09-2023 02:35:30:1808.txt");
         
-        
-        /*
-        Validador v = new Validador();
-        v.ValidarTableroCompleto("TablerosEncontrados/01-09-2023 01:33:13.1175 PM.txt");
-        */
     }
     
 }

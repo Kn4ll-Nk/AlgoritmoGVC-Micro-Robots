@@ -2,8 +2,3 @@
 2R 2B 1B 1G 
 1R 3R 4B 4W 
 1W 3G 4G 3W 
-
-Este es un tablero encontrado por la función de generar tableros de forma aleatoria 
-luego de corregir un problema en el validador.
-
-Perdón por las molestias. (シ_ _)シ
